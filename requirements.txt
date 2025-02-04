@@ -1,0 +1,5 @@
+argparse
+requests
+tqdm
+beautifulsoup4
+urllib3

@@ -1,0 +1,157 @@
+[
+    {
+      "pattern": "\\beval\\s*\\(",
+      "description": "Use of eval(...) for dynamic code execution",
+      "severity": "HIGH"
+    },
+    {
+      "pattern": "\\bFunction\\s*\\(",
+      "description": "Use of Function(...) for dynamic function creation (similar to eval)",
+      "severity": "HIGH"
+    },
+    {
+      "pattern": "\\bexecScript\\s*\\(",
+      "description": "execScript(...) (IE) for dynamic code execution",
+      "severity": "HIGH"
+    },
+    {
+      "pattern": "\\bdocument\\.write\\s*\\(",
+      "description": "Use of document.write(...) (XSS risk if input is not sanitized)",
+      "severity": "HIGH"
+    },
+    {
+      "pattern": "\\bdocument\\.writeln\\s*\\(",
+      "description": "Use of document.writeln(...) (XSS risk if input is not sanitized)",
+      "severity": "HIGH"
+    },
+    {
+      "pattern": "\\binnerHTML\\s*=",
+      "description": "Direct assignment to innerHTML (possible XSS)",
+      "severity": "HIGH"
+    },
+    {
+      "pattern": "\\bouterHTML\\s*=",
+      "description": "Direct assignment to outerHTML (possible XSS)",
+      "severity": "HIGH"
+    },
+    {
+      "pattern": "\\bsetTimeout\\s*\\(\\s*(['\"])",
+      "description": "Use of setTimeout with string (can be interpreted as code)",
+      "severity": "MEDIUM"
+    },
+    {
+      "pattern": "\\bsetInterval\\s*\\(\\s*(['\"])",
+      "description": "Use of setInterval with string (can be interpreted as code)",
+      "severity": "MEDIUM"
+    },
+    {
+      "pattern": "\\bnew\\s+ActiveXObject\\s*\\(",
+      "description": "Use of ActiveXObject(...) (only in IE, but potentially dangerous)",
+      "severity": "MEDIUM"
+    },
+    {
+      "pattern": "\\blocation\\.(assign|replace|href)\\s*=",
+      "description": "Redirection without sanitization (possible phishing or open redirect)",
+      "severity": "MEDIUM"
+    },
+    {
+      "pattern": "\\bdocument\\.cookie\\s*=",
+      "description": "Direct manipulation of cookies (ensure secure usage, HttpOnly, etc.)",
+      "severity": "MEDIUM"
+    },
+    {
+      "pattern": "\\blocalStorage\\.",
+      "description": "Use of localStorage (data may be exposed without encryption)",
+      "severity": "MEDIUM"
+    },
+    {
+      "pattern": "\\bsessionStorage\\.",
+      "description": "Use of sessionStorage (data may be exposed without encryption)",
+      "severity": "MEDIUM"
+    },
+    {
+      "pattern": "\\bcrypto\\.subtle\\.",
+      "description": "Use of Web Crypto API. Verify proper implementation",
+      "severity": "MEDIUM"
+    },
+    {
+      "pattern": "\\bfetch\\s*\\(\\s*(['\"])javascript:",
+      "description": "fetch('javascript:...') may lead to unintended executions",
+      "severity": "MEDIUM"
+    },
+    {
+      "pattern": "\\bXMLHttpRequest\\s*\\(",
+      "description": "AJAX call. Ensure server-side data sanitization",
+      "severity": "MEDIUM"
+    },
+    {
+      "pattern": "\\bWebSocket\\s*\\(",
+      "description": "WebSocket creation. Verify endpoint security",
+      "severity": "MEDIUM"
+    },
+    {
+      "pattern": "\\bimportScripts\\s*\\(",
+      "description": "Use of importScripts (Web Workers). Verify trusted sources",
+      "severity": "MEDIUM"
+    },
+    {
+      "pattern": "\\batob\\s*\\(",
+      "description": "Use of atob (Base64 decoding). Ensure data is trusted",
+      "severity": "LOW"
+    },
+    {
+      "pattern": "\\bbtoa\\s*\\(",
+      "description": "Use of btoa (Base64 encoding). Ensure data is trusted",
+      "severity": "LOW"
+    },
+    {
+      "pattern": "\\bObject\\.defineProperty\\(\\s*document",
+      "description": "Modification of document properties (may alter critical behaviors)",
+      "severity": "LOW"
+    },
+    {
+      "pattern": "\\bjQuery\\.globalEval\\s*\\(",
+      "description": "Use of jQuery.globalEval(...) (equivalent to eval)",
+      "severity": "HIGH"
+    },
+    {
+      "pattern": "\\bwhile\\s*\\(\\s*true\\s*\\)",
+      "description": "Infinite loop (may be a logic error or execution blocker)",
+      "severity": "LOW"
+    },
+    {
+      "pattern": "\\bFunction\\(\\s*[\"']return\\s+this[\"']\\)",
+      "description": "Pattern exposing global contexts (similar to eval)",
+      "severity": "HIGH"
+    },
+    {
+      "pattern": "\\bcrypto\\.createHmac\\(\\s*[\"']md5[\"']",
+      "description": "Use of MD5 for HMAC. Algorithm considered weak nowadays",
+      "severity": "LOW"
+    },
+    {
+      "pattern": "\\bdocument\\.execCommand\\s*\\(",
+      "description": "Use of document.execCommand (may manipulate clipboard or formats)",
+      "severity": "MEDIUM"
+    },
+    {
+      "pattern": "\\bwebkitRequestFileSystem\\s*\\(",
+      "description": "Use of requestFileSystem in Chrome (obsolete or experimental API)",
+      "severity": "LOW"
+    },
+    {
+      "pattern": "\\bindexedDB\\.",
+      "description": "Use of IndexedDB (verify if sensitive data is protected)",
+      "severity": "LOW"
+    },
+    {
+      "pattern": "\\bconsole\\.(log|debug|info|warn|error)",
+      "description": "Use of console.* in production environments (may leak data)",
+      "severity": "LOW"
+    },
+    {
+      "pattern": "(?:AKIA[0-9A-Z]{16}|AIza[0-9A-Za-z-_]{35}|ghp_[0-9A-Za-z]{36})",
+      "description": "Possible API key (AWS, Google, GitHub, etc.)",
+      "severity": "HIGH"
+    }
+]
