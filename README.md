@@ -1,5 +1,7 @@
 # VulnRadar
 
+<img width="680" alt="image" src="https://github.com/user-attachments/assets/20753632-d37f-4ddc-9168-fb055a2c7b5a" />
+
 📋 **Sobre**  
 O VulnRadar é uma ferramenta de análise de segurança projetada para:  
 - Baixar arquivos JavaScript de um site.  
