@@ -2,6 +2,8 @@ import os
 import re
 from tqdm import tqdm
 
+SEVERITY_LEVELS = ["LOW", "MEDIUM", "HIGH"]
+
 def check_js_file(js_path, patterns):
     """Checks patterns in JavaScript files."""
     vulnerabilities = []
@@ -41,3 +43,15 @@ def scan_directory(directory, patterns):
             pbar.update(1)
 
     return vulnerabilities
+
+
+def filter_vulnerabilities(vulnerabilities, min_severity="LOW"):
+    """Filters vulnerabilities by minimum severity."""
+    if min_severity not in SEVERITY_LEVELS:
+        return vulnerabilities
+    threshold = SEVERITY_LEVELS.index(min_severity)
+    filtered = [
+        v for v in vulnerabilities
+        if SEVERITY_LEVELS.index(v.get("severity", "LOW")) >= threshold
+    ]
+    return filtered
