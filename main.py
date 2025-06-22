@@ -4,7 +4,7 @@ import json
 from webscanner.banner import print_banner
 from webscanner.utils import create_site_directory
 from webscanner.downloader import download_js_files
-from webscanner.scanner import scan_directory
+from webscanner.scanner import scan_directory, filter_vulnerabilities
 from webscanner.reporter import save_report, generate_summary_and_confirm
 from webscanner.endpoints import find_endpoints, check_endpoints
 import sys
@@ -89,6 +89,12 @@ def main():
     )
     parser.add_argument("-o", "--output", default="./results", help="Directory to save reports")
     parser.add_argument("-v", "--verify-endpoints", action="store_true", help="Verify HTTP status codes for found endpoints")
+    parser.add_argument(
+        "--min-severity",
+        choices=["LOW", "MEDIUM", "HIGH"],
+        default="LOW",
+        help="Minimum severity level to include in reports",
+    )
     args = parser.parse_args()
 
     print_banner()
@@ -133,6 +139,7 @@ def main():
     # Scan for vulnerabilities
     print_info("Scanning for vulnerabilities...")
     vulnerabilities = scan_directory(directory, patterns)
+    vulnerabilities = filter_vulnerabilities(vulnerabilities, args.min_severity)
     display_vulnerabilities(vulnerabilities)
 
     if not generate_summary_and_confirm(vulnerabilities):
